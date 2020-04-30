@@ -1,0 +1,193 @@
+<html>
+<head>
+<script type="text/javascript" src="bookcrud.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<style>
+
+    .table{
+        margin-top:40px;
+        background-color: lightgray;
+        margin-right: 100px;
+        
+    }
+
+    td,th{
+        text-align: center;
+    }
+    .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h1{
+        margin-top: 20px;
+        text-align: center;
+        
+    }
+
+    input{
+        margin:10px;
+        border:1px solid grey;
+        border-radius:2px;
+        height:35px;
+    }
+
+    #addEmployee{
+        margin-top:7px;
+    }
+
+    .save{
+        display: none;
+    }
+
+    .edit{
+        display: inline;
+    }
+
+    .delete{
+        display: inline;
+    }    
+    
+    </style>
+
+</head>
+
+<body>
+
+    <div class="heading font-weight-bolder">
+        <h1>Employee Database</h1>
+    </div>
+
+<div id="wrapper" class="container-md">
+
+    <table align="center" id="empTable" class="table table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>S.NO</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Employee Code</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr id="row1">
+            <td id="sno1">1</td>
+            <td id="name1">Diya</td>
+            <td id="email1">diya@gmail.com</td>
+            <td id="empcode1">001</td>
+            <td><button type="button" id="edit1" class="btn btn-primary edit" onclick="editRow('1')" >Edit</button>
+                <button type="button" id="save1" class="btn btn-success save" onclick="save('1')">Save</button>
+                <button type="button" id="delete1" class="btn btn-danger delete" onclick="deleteRow('1')" >Delete</button></td>
+         </tr>
+
+          <tr id="row2">
+            <td id="sno2">2</td>
+            <td id="name2">Mike</td>
+            <td id="email2">mike@gmail.com</td>
+            <td id="empcode2">002</td>
+            <td><button type="button" id="edit2" class="btn btn-primary edit" onclick="editRow('2')">Edit</button>
+                <button type="button" id="save2" class="btn btn-success save" onclick="save('2')">Save</button>
+                <button type="button" id="delete2" class="btn btn-danger delete"onclick="deleteRow('2')">Delete</button></td>
+          </tr>
+          <tr id="row3">
+            <td id="sno3">3</td>
+            <td id="name3">Danny</td>
+            <td id="email3">danny@outlook.com</td>
+            <td id="empcode3">003</td>
+            <td><button type="button" id="edit3" class="btn btn-primary edit" onclick="editRow('3')">Edit</button>
+                <button type="button" id="save3" class="btn btn-success save" onclick="save('3')">Save</button>
+                <button type="button" id="delete3" class="btn btn-danger delete"onclick="deleteRow('3')">Delete</button></td>
+          </tr>
+          <tr class="addRowInputs">
+              <td class="padding"><input id="new_sno" type="text" class="input" placeholder="S.No" required></td>
+              <td><input id="new_name" type="text" class="inputfield" placeholder="Name" required></td>
+              <td><input id="new_email" type="email" class="inputfield" placeholder="Email" required></td>
+              <td><input id="new_empcode" type="text" class="inputfield" placeholder="Emp.Code" required></td>
+              <td><button type="button" id="addEmployee" class="btn btn-success" onclick="addEmployee()">Add Employee</button></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      
+      </table>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script>
+
+    function addEmployee() {
+
+        var newSnoValue=document.getElementById("new_sno").value;
+        var newNameValue=document.getElementById("new_name").value;
+        var newEmailValue=document.getElementById("new_email").value;
+        var newEmpCodeValue=document.getElementById("new_empcode").value;
+
+        var row=document.getElementById("empTable");
+        var length=(row.rows.length)-1;
+        var newRow= row.insertRow(length);
+        newRow.outerHTML="<tr id='row"+length+"'><td id='sno"+length+"'>"+newSnoValue+"</td><td id='name"+length+"'>"+newNameValue+"</td><td id='email"+length+"'>"+newEmailValue+"</td><td id='empcode"+length+"'>"+newEmpCodeValue+"</td><td><button type='button' id='edit"+length+"' class='btn btn-primary edit' onclick='editRow("+length+")' >Edit</button><button type='button' id='save"+length+"' class='btn btn-success save' onclick='save("+length+")'>Save</button><button type='button' id='delete"+length+"' class='btn btn-danger delete' onclick='deleteRow("+length+")' >Delete</button></td></tr>";
+        document.getElementById("new_sno").value="";
+        document.getElementById("new_name").value="";
+        document.getElementById("new_email").value="";
+        document.getElementById("new_empcode").value="";
+
+    
+        
+
+    }
+
+    function editRow(rownumber){
+
+        document.getElementById("edit"+rownumber).style.display="none";
+        document.getElementById("save"+rownumber).style.display="inline";
+
+        var sno=document.getElementById("sno"+rownumber);
+        var name=document.getElementById("name"+rownumber);
+        var email=document.getElementById("email"+rownumber);
+        var empcode=document.getElementById("empcode"+rownumber);
+        var sno_data=sno.innerHTML;
+        var name_data=name.innerHTML;
+        var email_data=email.innerHTML;
+        var empcode_data=empcode.innerHTML;
+        sno.innerHTML="<input type='text' class='inputfield' id='sno_field"+rownumber+"' value='"+sno_data+"'>";
+        name.innerHTML="<input type='text' class='inputfield' id='name_field"+rownumber+"' value='"+name_data+"'>";
+        email.innerHTML="<input type='email' class='inputfield' id='email_field"+rownumber+"' value='"+email_data+"'>";
+        empcode.innerHTML="<input type='text' class='inputfield' id='empcode_field"+rownumber+"' value='"+empcode_data+"'}>";
+        
+    }
+
+    function save(rownumber){
+
+
+        var sno_value=document.getElementById("sno_field"+rownumber).value;
+        document.getElementById("sno"+rownumber).innerHTML=sno_value;
+        var name_value=document.getElementById("name_field"+rownumber).value;
+        document.getElementById("name"+rownumber).innerHTML=name_value;
+        var email_value=document.getElementById("email_field"+rownumber).value;
+        document.getElementById("email"+rownumber).innerHTML=email_value;
+        var empcode_value=document.getElementById("empcode_field"+rownumber).value;
+        document.getElementById("empcode"+rownumber).innerHTML=empcode_value;
+
+
+        document.getElementById("save"+rownumber).style.display="none";
+        document.getElementById("edit"+rownumber).style.display="inline";
+        
+    }
+
+    function deleteRow(rownumber){
+        
+        document.getElementById("row"+rownumber).outerHTML="";
+
+    }
+
+   
+
+</script>
+</body>
+</html>
